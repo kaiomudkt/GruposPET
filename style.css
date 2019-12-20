@@ -43,9 +43,11 @@ e as mundacas feitas no tema filho "GruposPET" nao sera perdida.
 
 #lista_pet_estado ul li{
 	color: white;
+	overflow: scroll;/*verificar se é aqui msm*/
 }
 
 .light_header #navy > li > a,
 .light_header #navy > li > .slicknav_row > a {
     color: #fff;
+
 }
