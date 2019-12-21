@@ -36,5 +36,17 @@ require_once($template_diretorio_filho . "/custom-post-type/pet.php");
 //endpoints
 require_once($template_diretorio_filho . "/endpoints/versao1/usuario_post.php");
 require_once($template_diretorio_filho . "/endpoints/versao1/usuario_get.php");
+require_once($template_diretorio_filho . "/endpoints/versao1/usuario_put.php");
 
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
+//tempo que demora para expira o token
+//https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/
+function expire_token() {
+  return time() + (60 * 60);//1 hora
+}
+add_action('jwt_auth_expire', 'expire_token');
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
