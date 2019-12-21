@@ -35,5 +35,6 @@ require_once($template_diretorio_filho . "/custom-post-type/pet.php");
 
 //endpoints
 require_once($template_diretorio_filho . "/endpoints/versao1/usuario_post.php");
+require_once($template_diretorio_filho . "/endpoints/versao1/usuario_get.php");
 
 

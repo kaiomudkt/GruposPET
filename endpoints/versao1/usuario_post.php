@@ -47,6 +47,7 @@ function api_usuario_post($request) {
       'first_name' => $nome,
       'role' => 'subscriber',
     );
+    
     wp_update_user($response);
 
     update_user_meta($user_id, 'cep', $cep);

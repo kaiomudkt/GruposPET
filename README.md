@@ -23,3 +23,26 @@ entre no painel de administrador do wordpress,
 com o link "http://seuDominio.com.br/wp-admin",
 logue em sua conta de admin,
 e va ate o menu "aparencia > temas"
+
+____________________________________________________________________________
+
+WordPress REST API - JWT JSON Web Token
+copie e cole o seguinte trecho a seguir no arquivo "wp-config.php":
+
+/*
+
+No arquivo "wp-config.php" implemente  essas duas linha de código mostradas a baixo
+
+fazer o download do plugin "JWT Authentication for WP REST API V2",
+instalar e ativar o plugin, link:
+https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/
+
+Gera senha aleatorias:
+ https://api.wordpress.org/secret-key/1.1/salt/
+
+define('JWT_AUTH_SECRET_KEY', 'your-top-secret-key');
+*/
+
+define('JWT_AUTH_SECRET_KEY', 'B J@+oB !UojJaZhB5[>)fMX-QmAN#gG1X%j/gT?h9:/oz4C@+7@#(W^hAbTW~.k');
+
+define('JWT_AUTH_CORS_ENABLE', true);
