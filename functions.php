@@ -19,34 +19,3 @@ add_action('wp_enqueue_scripts' , 'carrega_estilos');
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-
-//se for de tema pai, carrega desse caminho o custom-post-type
-//$template_diretorio = get_template_directory_uri();
-//require_once($template_diretorio . "/custom-post-type/pet.php");
-
-//se for de tema filho, carrega desse caminho o custom-post-type
-//caminho (/var/www/html/wp-content/themes/GruposPET)
-$template_diretorio_filho = get_stylesheet_directory();
-//echo $template_diretorio_filho;
-require_once($template_diretorio_filho . "/custom-post-type/pet.php");
-
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-
-//endpoints
-require_once($template_diretorio_filho . "/endpoints/versao1/usuario_post.php");
-require_once($template_diretorio_filho . "/endpoints/versao1/usuario_get.php");
-require_once($template_diretorio_filho . "/endpoints/versao1/usuario_put.php");
-
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-
-//tempo que demora para expira o token
-//https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/
-function expire_token() {
-  return time() + (60 * 60);//1 hora
-}
-add_action('jwt_auth_expire', 'expire_token');
-
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
