@@ -3,38 +3,64 @@
 <div id="mapa_pets_brasil">
     <div style="">
         <div id="mapa_brasil">
-        <?php
-            include('Mapa+do+Brasil+SVGa.html');
-        ?>
-    </div>
-
+            <?php
+                include('Mapa+do+Brasil+SVGa.html');
+            ?>
+        </div>
     </div>
 
     <div id="lista_pet_estado">
-        <?php 
-            /*listar todos os pets desse estado
-https://www.youtube.com/watch?v=Roz4nx5bcmU&t=590s
-            */
-            query_posts('post_type=pet_post_type_key');
+        
+        <?php
 
             /*
-            loop que exibir tudo  que tem dentro post_type = pet_post_type_key
+            Este arquivo substitui o arquivo "home-blog.php" do tema Pai "Kyma"
+            que esta sendo usado para realizar as postagens dos ultimos post feito nesta instalacao do WP.
 
+            Ja este arquivo atual "home-blog.php" do tema filho "gruposPET" esta pegando as postagens do site estadual via API,
+            ainda falta fazer o desinger, ou aproveitar o designer do "home-blog.php" do tema "Kyma"
             */
-            if(have_posts()): while (have_posts()): the_post();
-                ?>
-                <ul>
-                    <li><?php the_title(); ?> </li>
-                </ul>
-                <?php  
-                endwhile;
-            else:
-                ?>
-                <p>não há pet cadastrado neste estado...</p>
-            <?php
-            endif;
+
+
+
+            //https://developer.wordpress.org/reference/functions/rest_url/
+            //https://github.com/WP-API/client-js/blob/master/client-js.php
+            //https://github.com/oskarrough/ember-wordpress
+            //https://codex.wordpress.org/Function_Reference/wp_remote_get
+            //https://codex.wordpress.org/Function_Reference/register_post_type
+
+            $arguments = array('method' => 'GET');
+            $url = 'http://localhost:8083/?rest_route=/wp/v2/pets';
+            
+
+            // Faz a solicitação GET para o endereço.
+            $request = wp_remote_get( $url, $arguments);
+            // Se não houve erro...
+            if ( ! is_wp_error( $request ) ) {
+                // pegamos o "corpo" da resposta recebida...
+                $body = wp_remote_retrieve_body( $request );
+                // e transformamos de JSON em um array PHP normal.
+                $data = json_decode( $body );
+            
+                // Se não houve erro nesta etapa, iteramos pelo array
+                // e montamos uma lista com título e link.
+                if ( ! is_wp_error( $data ) ) {
+                    echo '<ul>';
+                    foreach( $data as $rest_post ) {
+                        echo '<li>';
+                            echo '<a href="' . esc_url( $rest_post->link ) . '">' . $rest_post->title->rendered . '</a>';
+                        echo '</li>';
+                    }
+                    echo '</ul>';
+                }else{
+                    echo 'erro: is_wp_error( $data)';
+                }
+            }else{
+                $error_msg = $request->get_error_message();
+                echo "error: request = wp_remote_get(): $error_msg";
+            }
         ?>
-        
-        
     </div>
+
+    
 </div>
