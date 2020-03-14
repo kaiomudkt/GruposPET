@@ -1,24 +1,25 @@
 ﻿<!DOCTYPE html>
 <!-- saved from url=(0147)http://10.30.5.72mapa-do-brasil-svg.html -->
 <html lang="pt-br"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+
   <title>Mapa do Brasil SVG</title>
-  <script type="text/javascript">
+  <script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
       $(document).ready(function(){
         $("#loading").hide();
-        $('.estado').click(function(e){
-            e.preventDefault();
-            var estado = $(this).attr('xlink:href').toUpperCase();
+        $('.estado').click(function(event){
+            event.preventDefault(); // tira o evento padrao do click
+            var estado = $(this).attr('xlink:href').toUpperCase(); // pegar o valor do atributo xlink:href e deixar tudo maiusculo
 
-
-            $("#loading").show();
+            $("#loading").show(); //icon 
+            //faz requisicao
             $.ajax({
-                url: 'servo.php',
+                url: 'http://grupospet.ufms.br/?rest_route=/wp/v2/pet_post_type_key',
                 type: "GET",
                 dataType: "json",
                 data: {uf: estado}
-            })
-            .done(function (data) {
+            }).done(function (data) { //depois da requisicao
+                console.log(data);
                 var items = [];
                 $("#titulo").html("<h2>"+data.uf+"</h2>");
                 $.each( data.valores, function( key, val ) {
