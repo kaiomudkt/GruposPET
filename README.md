@@ -1,7 +1,7 @@
 
 # GruposPET
-Esse projeto atende à demanda de divulgação do projeto Programa de Educação Tutorial - PET, com o uso do CMS Wordpress, onde por meio do API REST do Wordpress faz a republicação das postagens de cada instalação do Wordpress para outra instalação do Wordpress.
-Este repositório é responsável pelas funções do Site Estadual, sendo um tema do Wordpress. Este tema é chamado de “tema filho”, e coloquei como padrão o “tema pai” o tema “KYMA”, os arquivos do “tema pai” serão utilizado, a não ser que o arquivo do “tema pai” seja sobrescrito no “tema filho”, para isso, simplesmente recriamos o arquivo no “tema filho” com o mesmo nome do arquivo no “tema pai”, assim o Wordpress usará o arquivo do “tema filho”.
+Esse projeto atende à demanda de divulgação do Programa de Educação Tutorial (PET), com o uso do CMS Wordpress, onde por meio do API REST do Wordpress faz a republicação das postagens de cada instalação do Wordpress para outra instalação do Wordpress, ou seja, dos sites estaduais para o site nacional.
+Este repositório é responsável pelas funções do Site Estadual, sendo um tema do Wordpress. Este tema é chamado de “tema filho”, e coloquei como padrão o “tema pai” o tema “KYMA”, os arquivos do “tema pai” serão utilizados, a não ser que o arquivo do “tema pai” seja sobrescrito no “tema filho”, para isso, simplesmente recrie o arquivo no “tema filho” com o mesmo nome do arquivo no “tema pai”, assim o Wordpress usará o arquivo do “tema filho”.
 
 Neste tema existe um arquivo SVG que forma o mapa do brasil (Mapa+do+Brasil+SVGa.html) no qual lista os PETs que estão cadastrados por estado do Brasil, pegando esses dados via API do site Nacional.
 A ultima postagem feita no site estadual sera republicada na home do site nacional,
