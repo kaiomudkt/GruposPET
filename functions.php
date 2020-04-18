@@ -9,3 +9,11 @@ function carrega_estilos(){
 //momendo em que essa funcao vai ser executada = wp_enqueue_scripts
 //funcao que vai ser executada = carrega_estilos
 add_action('wp_enqueue_scripts' , 'carrega_estilos');
+
+
+/**
+ * criar arquivo que add metadado no USER, para saber de qual PET esse USER vai gerenciar
+ * https://developer.wordpress.org/reference/functions/add_user_meta/
+ * add_user_meta( int $user_id, string $meta_key, mixed $meta_value, bool $unique = false )
+ */
+require_once(get_stylesheet_directory() . "/user-meta.php");
