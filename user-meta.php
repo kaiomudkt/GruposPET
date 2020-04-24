@@ -39,22 +39,28 @@ try {
 
     <table class="form-table">
         <tr>
-            <th><label for="pet">PETs do estado</label></th>
+            <th><label for="pet_responsavel">PETs do estado</label></th>
             <td>
             <?php
               $screen = get_current_screen();
               if ($screen->base == "profile") {
             ?>  
-                <select id="pet" name="pet" disabled>
+                <select id="pet_responsavel" name="pet_responsavel" disabled="true">
              <?php 
             }else{
             ?>  
-                <select id="pet" name="pet" >
+                <select id="pet_responsavel" name="pet_responsavel" >
              <?php 
             }
-                        foreach ( $pets as $pet ) {
-                          //printf( '<option value=" %1$s "> %1$s </option>', $pet->post_title,  $pet->post_title );
-                          printf( '<option value=" %1$s "> %1$s </option>', $pet,  $pet );
+                        //se o usuario ja tiver esse campo preenchido
+                        $pet_responsavel_user_atual = get_user_meta( get_current_user_id(),  'pet_responsavel', true);
+                        if( $screen->base == "profile"){
+                            printf( '<option value=" %1$s "> %1$s </option>', $pet_responsavel_user_atual,  $pet_responsavel_user_atual );
+                        }else{
+                            foreach ( $pets as $pet ) {
+                                //printf( '<option value=" %1$s "> %1$s </option>', $pet->post_title,  $pet->post_title );
+                                printf( '<option value=" %1$s "> %1$s </option>', $pet,  $pet );
+                            }
                         }
                     ?>
                 </select>
@@ -67,7 +73,7 @@ try {
   function save_extra_profile_fields( $user_id ) {
     if ( !current_user_can( 'edit_user', $user_id ) )
         return false;
-    update_user_meta( $user_id, 'pet', $_POST['pet'] );
+    update_user_meta( $user_id, 'pet_responsavel', $_POST['pet_responsavel'] );
   }
   add_action( 'user_register', 'save_extra_profile_fields', 10, 1 );
 

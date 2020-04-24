@@ -17,3 +17,10 @@ add_action('wp_enqueue_scripts' , 'carrega_estilos');
  * add_user_meta( int $user_id, string $meta_key, mixed $meta_value, bool $unique = false )
  */
 require_once(get_stylesheet_directory() . "/user-meta.php");
+
+
+/*
+O arquivo 'meta_boxes_post.php' vai cuidar dos metadados,
+do POST padrao do tipo PET
+*/
+require_once(get_stylesheet_directory() . "/meta_boxes_post.php");
