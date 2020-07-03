@@ -26,7 +26,12 @@ ________________________________________________________________________________
     15.  baixe o tema ‘KYMA’ neste link: https://wordpress.org/themes/kyma/
     16.  descompacte, e coloque o tema “KYMA” dentro do diretório "wp-content/themes/",
     17.  ao lado do tem “GruposPET”.
-    18.  Pronto ;D
+    18.  clique em "configurações" no painel do administrador, logado como admin do site,
+    19.  http://meu-dominio/wp-admin/options-permalink.php
+    20.  depois, clique em "links permanentes",
+    21.  na opção "Configurações comuns", marque a opção de "Nome do post"
+    22.  click em "salvar alterações"
+    23.  Pronto ;D
 
 ______________________________________________________________________________________________________
 
