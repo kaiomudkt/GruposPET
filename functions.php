@@ -24,3 +24,10 @@ O arquivo 'meta_boxes_post.php' vai cuidar dos metadados,
 do POST padrao do tipo PET
 */
 require_once(get_stylesheet_directory() . "/meta_boxes_post.php");
+
+
+//Registra um tamanho de imagem para a miniatura da postagem.
+set_post_thumbnail_size(1280, 720, true);
+
+//registrar wp_add_dashboard_widget do nome do estado(UF) que pertence, local->"work area"
+require_once(get_stylesheet_directory() . "/nome-estado-dashboard-widget.php");

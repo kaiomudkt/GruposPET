@@ -19,10 +19,13 @@ quando o tema pai for atualizado, somente as mundacas feitas no tema pai serao p
 e as mundacas feitas no tema filho "GruposPET" nao sera perdida.
 */
 
+
 #mapa_pets_brasil{
-	background: #00a69b;
+	background: linear-gradient(to right, #00a69b , #002ba6);
 	overflow: hidden;
+	
 }
+
 
 #mapa_brasil{
 	/*background-color: red;*/

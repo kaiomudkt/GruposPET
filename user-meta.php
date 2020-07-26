@@ -11,31 +11,15 @@ add_action('init', function() {
    * @param WP_User $user User object.
    */
   function additional_profile_fields( $user ) {
-
-
-
-
- /*
- $response = wp_remote_get( 'http://localhost:8083/wp-json/api/pet?estado=mato-grosso-do-sul' );
-
-
-try {
-    // Note that we decode the body's response since it's the actual JSON feed
-    $pets = json_decode( $response['body'] );
-} catch ( Exception $ex ) {
-    $pets = null;
-} // end try/catch
-
-    //apagar
-    foreach ($pets as $pet) {
-        foreach($pet as $key => $value){
-            echo "{$key} => {$value} ";
-        }
+    //$estado = UFdoSiteAtual;
+    $response = wp_remote_get( "http://172.16.28.2/wp-json/api/pet?estado=" . get_option('nome_estado') );
+    try {
+      // Note that we decode the body's response since it's the actual JSON feed
+      $pets = json_decode( $response['body'] );
+    } catch ( Exception $ex ) {
+        $pets = null;
     }
-*/
- $pets = ['pet1', 'pet2', 'pet3'];
-
-?>
+    ?>
 
     <table class="form-table">
         <tr>
@@ -57,9 +41,10 @@ try {
                         if( $screen->base == "profile"){
                             printf( '<option value=" %1$s "> %1$s </option>', $pet_responsavel_user_atual,  $pet_responsavel_user_atual );
                         }else{
-                            foreach ( $pets as $pet ) {
-                                //printf( '<option value=" %1$s "> %1$s </option>', $pet->post_title,  $pet->post_title );
-                                printf( '<option value=" %1$s "> %1$s </option>', $pet,  $pet );
+                            if ($pets) {
+                              foreach ( $pets as $pet ) {
+                                printf( '<option value=" %1$s "> %1$s </option>', $pet->post_title,  $pet->post_title );
+                              }
                             }
                         }
                     ?>
