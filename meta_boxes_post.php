@@ -62,6 +62,13 @@ function salva_meta_box( $post_id ) {
         }else{
             // echo 'não exite esse parameto' . $field;
         }
+        /*
+        no user logado, tem um campo que diz qual a URL para a postagem do C.P.T. PET,
+        e agora, pegamos essa URL, e adicionamos na postagem ,
+        assim, a postagem sabe o link para o seu pet.
+        */ 
+        $url_pet = get_user_meta(get_current_user_id(),  'url_pet', true);
+        update_post_meta($post_id, 'url_pet', $url_pet);
     }
 }
 add_action( 'save_post', 'salva_meta_box' );

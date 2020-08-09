@@ -12,7 +12,7 @@ add_action('init', function() {
    */
   function additional_profile_fields( $user ) {
     //$estado = UFdoSiteAtual;
-    $response = wp_remote_get( "http://172.16.28.2/wp-json/api/pet?estado=" . get_option('nome_estado') );
+    $response = wp_remote_get( "http://172.16.28.2/wp-json/api/pet?estado=" . sanitize_text_field(get_option('nome_estado')) );
     try {
       // Note that we decode the body's response since it's the actual JSON feed
       $pets = json_decode( $response['body'] );
@@ -23,7 +23,7 @@ add_action('init', function() {
 
     <table class="form-table">
         <tr>
-            <th><label for="pet_responsavel">PETs do estado</label></th>
+            <th><label for="pet_responsavel">PET a ser gerenciado</label></th>
             <td>
             <?php
               $screen = get_current_screen();
@@ -33,6 +33,7 @@ add_action('init', function() {
              <?php 
             }else{
             ?>  
+            <?php $array_metadados = array(); ?>
                 <select id="pet_responsavel" name="pet_responsavel" >
              <?php 
             }
@@ -42,13 +43,21 @@ add_action('init', function() {
                             printf( '<option value=" %1$s "> %1$s </option>', $pet_responsavel_user_atual,  $pet_responsavel_user_atual );
                         }else{
                             if ($pets) {
+                              
                               foreach ( $pets as $pet ) {
-                                printf( '<option value=" %1$s "> %1$s </option>', $pet->post_title,  $pet->post_title );
+                                printf( '<option value=" %s "> %s </option>', $pet->post_name,  $pet->post_title, );
+                                array_push($array_metadados, '<input type="hidden" name="'.$pet->post_name.'" value="'.$pet->guid.'">');
                               }
+                              
                             }
                         }
                     ?>
                 </select>
+                <?php 
+                foreach ($array_metadados as $metadado) {
+                  echo $metadado;
+                }
+                ?>
             </td>
         </tr>
     </table>
@@ -56,12 +65,14 @@ add_action('init', function() {
 <?php
   }
   function save_extra_profile_fields( $user_id ) {
-    if ( !current_user_can( 'edit_user', $user_id ) )
-        return false;
-    update_user_meta( $user_id, 'pet_responsavel', $_POST['pet_responsavel'] );
+    if ( !current_user_can( 'edit_user', $user_id ) ){
+      return false;
+    }
+    $url_pet = sanitize_text_field($_POST['pet_responsavel']);
+    update_user_meta( $user_id, 'url_pet', sanitize_text_field($_POST[ $url_pet ]) );
+    update_user_meta( $user_id, 'pet_responsavel', sanitize_text_field($_POST['pet_responsavel']) );
   }
   add_action( 'user_register', 'save_extra_profile_fields', 10, 1 );
-
   add_action('user_new_form', 'additional_profile_fields');
   add_action('edit_user_profile', 'additional_profile_fields');
   add_action('show_user_profile', 'additional_profile_fields');
