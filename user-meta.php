@@ -43,10 +43,9 @@ add_action('init', function() {
                             printf( '<option value=" %1$s "> %1$s </option>', $pet_responsavel_user_atual,  $pet_responsavel_user_atual );
                         }else{
                             if ($pets) {
-                              
                               foreach ( $pets as $pet ) {
-                                printf( '<option value=" %s "> %s </option>', $pet->post_name,  $pet->post_title, );
-                                array_push($array_metadados, '<input type="hidden" name="'.$pet->post_name.'" value="'.$pet->guid.'">');
+                                echo '<option value="'.$pet->post_title.'">'.$pet->post_title.'</option>';
+                                array_push($array_metadados, '<input type="hidden" name="'.$pet->post_title.'" value="'.$pet->guid.'">');
                               }
                               
                             }
@@ -54,8 +53,10 @@ add_action('init', function() {
                     ?>
                 </select>
                 <?php 
-                foreach ($array_metadados as $metadado) {
-                  echo $metadado;
+                if (isset($array_metadados)) {
+                  foreach ($array_metadados as $metadado) {
+                    echo $metadado;
+                  }
                 }
                 ?>
             </td>
@@ -68,14 +69,16 @@ add_action('init', function() {
     if ( !current_user_can( 'edit_user', $user_id ) ){
       return false;
     }
-    $url_pet = sanitize_text_field($_POST['pet_responsavel']);
-    update_user_meta( $user_id, 'url_pet', sanitize_text_field($_POST[ $url_pet ]) );
-    update_user_meta( $user_id, 'pet_responsavel', sanitize_text_field($_POST['pet_responsavel']) );
+    $pet_selecionado = sanitize_text_field($_POST['pet_responsavel']);
+    $pet_selecionado_index = preg_replace('/\s+/', '_', $pet_selecionado);//como o 'post_title' tem com caracter de espaço, substituo por '_'.
+    $url_pet = sanitize_text_field($_POST[$pet_selecionado_index]);
+    update_user_meta($user_id, 'url_pet', $url_pet);
+    update_user_meta($user_id, 'pet_responsavel', $pet_selecionado);
   }
-  add_action( 'user_register', 'save_extra_profile_fields', 10, 1 );
+  add_action('user_register', 'save_extra_profile_fields', 10, 1 );
   add_action('user_new_form', 'additional_profile_fields');
   add_action('edit_user_profile', 'additional_profile_fields');
   add_action('show_user_profile', 'additional_profile_fields');
-  add_action( 'personal_options_update', 'save_extra_profile_fields' );
-  add_action( 'edit_user_profile_update', 'save_extra_profile_fields' );
+  add_action('personal_options_update', 'save_extra_profile_fields' );
+  add_action('edit_user_profile_update', 'save_extra_profile_fields' );
 });
