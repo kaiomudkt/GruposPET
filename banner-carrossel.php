@@ -17,25 +17,25 @@
 	</ol>
     <div class="carousel-inner ">
 		<?php 
-			if( $my_query_banner->have_posts()) : 
-				//$banner = $banners[0];
-				$c = 0;
-				while( $my_query_banner->have_posts() ) : 
-					$my_query_banner->the_post(); 
-					?>
-					<div class="carousel-item <?php $c++; if($c == 1) { echo ' active'; } ?>">
-							<?php the_post_thumbnail( 'large', array('class' => 'img-fluid rounded d-block w-100')) ?>
-						<div class="carousel-caption d-none d-md-block">
-							<h1 class="text-primary">
-								<?php the_title(); ?>
-							</h1>
-							<div class="p-3 mb-2 bg-dark text-white">
-								<?php the_excerpt(); ?>
-							</div>
+		if($my_query_banner->have_posts()) : 
+			//$banner = $banners[0];
+			$c = 0;
+			while($my_query_banner->have_posts()) : 
+				$my_query_banner->the_post(); 
+				?>
+				<div class="carousel-item tamanho-carrossel <?php $c++; if($c == 1) { echo ' active'; } ?>">
+					<?php the_post_thumbnail( 'large', array('class' => 'tamanho-carrossel img-fluid rounded d-block w-100')) ?>
+					<div class="carousel-caption d-none d-md-block">
+						<h1 class="text-primary">
+							<?php the_title(); ?>
+						</h1>
+						<div class="p-3 mb-2 bg-dark text-white">
+							<?php the_excerpt(); ?>
 						</div>
 					</div>
-		<?php 	endwhile; 
-			endif; ?>
+				</div>
+	<?php 	endwhile; 
+		endif; ?>
 		<?php wp_reset_query(); ?>
     </div>
 	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

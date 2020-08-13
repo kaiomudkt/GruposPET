@@ -25,11 +25,9 @@ $layout = onepress_get_layout();
         <?php onepress_breadcrumb(); ?>
         <div id="content-inside" class="container <?php echo esc_attr( $layout ); ?>">
 			<div id="primary" class="content-area">
-				<main id="main" class="site-main" role="main">
 					<!-- carrossel banner -->
 						<?php require_once(get_stylesheet_directory() . "/banner-carrossel.php");  ?>
 					<!-- list post -->
-					<div class="">
 						<?php if ( have_posts() ) : ?>
 
 							<?php /* Start the Loop */ ?>
@@ -55,8 +53,6 @@ $layout = onepress_get_layout();
 						<?php endif; ?>
 
 						<?php ?>
-					</div>
-				</main><!-- #main -->
 				<!-- MAPA BRASIL -->
 				<div id="mapa_pets_brasil" class=" post list-article clearfix">
 				    <div style="">

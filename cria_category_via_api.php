@@ -42,7 +42,6 @@ function verifica_novas_pets_neste_estado(){
         //https://developer.wordpress.org/reference/functions/category_exists/
         if (!category_exists($pet->post_title)) {
           $id_category = cria_nova_categoria($pet->post_title, $pet->guid );
-          marca_category();
         }
       }//fim foreach
     }
@@ -78,8 +77,21 @@ function cria_nova_categoria($nome, $url){
 https://developer.wordpress.org/reference/functions/wp_insert_category/
 depois que criar a categoria, e o user salvar o post, marcar a categoria que representar o pet.
 */
-//add_action('save_post', 'marca_category');
-function marca_category(){
+/*
+Uma vez que esta ação é acionada logo após a postagem ser salva, você pode acessar facilmente este objeto de postagem usando get_post($post_id);.
+global $post;
+$thePostID = $post->ID;
+*/
+//add_action('save_post', 'marca_category');//esta chamando antes de salvar
+//add_action('post_updated', 'marca_category');//quando for excluido
+//add_action('new_to_publish', 'marca_category', 10, 1);//parece q tem q mudar os parametros, old e new
+//add_action('draft_to_publish', 'marca_category');
+//add_action('pending_to_publish', 'marca_category');
+//add_action('wp_insert_post', 'marca_category');//chamando já no ADD e nao no salvar
+function marca_category($post_id, $varr){
+  var_dump('hook new_to_publish', $post_id);
+  var_dump('titulo',get_the_title( $post_id ));
+  exit;
   $pet_atual = esc_attr(get_post_meta( get_the_ID(), 'pet_responsavel', true));//pet do user logado
   if ($pet_atual) {//por exemplo, o super admin nao tem
     $id_categoria = get_cat_ID($pet_atual);
@@ -93,4 +105,6 @@ function marca_category(){
     );
   }
 }
+
+//https://developer.wordpress.org/reference/functions/wp_category_checklist/
 ?>

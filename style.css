@@ -104,3 +104,9 @@ h2{
 	width: 40px !important;
     height: 40px !important;
 }
+
+.tamanho-carrossel{
+	width: 650px;
+	height: 400px;
+    object-fit: cover;
+}
